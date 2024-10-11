@@ -1,0 +1,107 @@
+﻿<Window x:Class="MunicipalityApp.MVVM.View.AddEventWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MunicipalityApp.MVVM.View"
+        mc:Ignorable="d"
+        Height="400"
+        Width="400"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="White"
+        BorderBrush="Black"
+        BorderThickness="1.5">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Add A New Event"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               FontSize="20"
+               FontWeight="DemiBold"
+               Grid.Row="0"/>
+
+        <Label Content="Event Name"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Grid.Row="1"
+               FontSize="16"/>
+        
+        <TextBox x:Name="tbEventName"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 Width="200"
+                 Grid.Row="2"
+                 Height="30"
+                 VerticalContentAlignment="Center"/>
+
+        <Label Content="Category"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Grid.Row="3"
+               FontSize="16"/>
+        
+        <ComboBox x:Name="cbEventCategory"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Width="200"
+                  Grid.Row="4"
+                  Height="30">
+            <ComboBoxItem Content="Music"/>
+            <ComboBoxItem Content="Sports"/>
+            <ComboBoxItem Content="Education"/>
+            <ComboBoxItem Content="Technology"/>
+            <ComboBoxItem Content="Art"/>
+        </ComboBox>
+
+        <Label Content="Date"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Grid.Row="5"
+               FontSize="16"/>
+        
+        <DatePicker x:Name="dpEventDate"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="200"
+                    Grid.Row="6"
+                    Height="30"/>
+
+        <StackPanel Grid.Row="7"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+            <Button x:Name="btnAddEvent"
+                    Content="Add Event"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,10,0"
+                    VerticalAlignment="Center"
+                    Width="100"
+                    Height="30" Click="btnAddEvent_Click"/>
+            
+            <Button x:Name="btnCancel"
+                    Content="Cancel"
+                    HorizontalAlignment="Center"
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    Width="100"
+                    Height="30" Click="btnCancel_Click"/>
+
+        </StackPanel>
+
+
+    </Grid>
+</Window>
