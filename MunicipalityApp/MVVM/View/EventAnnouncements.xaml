@@ -7,7 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="650"
              d:DesignWidth="800"
-             Background="White">
+             Background="Transparent"
+             BorderBrush="White"
+             BorderThickness="1">
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -21,20 +23,21 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
             <RowDefinition Height="70"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="40"/>
             <RowDefinition/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="1"
                    Grid.Column="1"
-                   Text="Search Events..."
-                   FontSize="18"
+                   Text="Search For Events..."
+                   FontSize="24"
                    FontWeight="DemiBold"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
-                   Margin="15,0,0,0"/>
+                   Margin="15,0,0,0"
+                   Foreground="White"/>
 
         <StackPanel Grid.Row="1"
                     Grid.Column="2"
@@ -42,85 +45,362 @@
                     Orientation="Horizontal"
                     Margin="5">
 
+           
+
+
             <ComboBox x:Name="cbCategories"
                       Width="180"
                       Height="50"
                       FontSize="18"
                       FontWeight="Medium"
                       HorizontalContentAlignment="Center"
-                      VerticalContentAlignment="Center"
-                      
-                      />
+                      VerticalContentAlignment="Center"/>
 
             <DatePicker x:Name="dpEventDate"
+            Width="180"
+            Height="50"
+            SelectedDateFormat="Short"
+            VerticalContentAlignment="Center"
+            FontSize="18"
+            FontWeight="Medium"
+            Margin="10,0,0,0">
+                <DatePicker.Style>
+                    <Style TargetType="DatePicker">
+                        <Setter Property="Foreground" Value="#333"/>
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="BorderBrush" Value="#3A79F7"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+                        <!-- Drop shadow for depth -->
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Gray" BlurRadius="6" ShadowDepth="2"/>
+                            </Setter.Value>
+                        </Setter>
+
+                        <!-- Hover Effect -->
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#F0F7FF"/>
+                                <Setter Property="BorderBrush" Value="#2C5CD3"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Gray" BlurRadius="8" ShadowDepth="4"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DatePicker.Style>
+            </DatePicker>
+
+
+            <!--<DatePicker x:Name="dpEventDate"
                         Width="180"
                         Height="50"
                         SelectedDateFormat="Short"
                         VerticalContentAlignment="Center"
                         FontSize="18"
                         FontWeight="Medium"                        
-                        Margin="10,0,0,0"/>
+                        Margin="10,0,0,0"/>-->
 
             <Button x:Name="btnSearchEvents"
                     Width="100"
                     Height="50"
                     Margin="10,0,0,0"
-                    Content="Search" Click="btnSearchEvents_Click"/>
+                    Content="Search"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Click="btnSearchEvents_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#3A79F7"/>
+                        <Setter Property="BorderBrush" Value="#2C5CD3"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="Padding" Value="10,5"/>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Black" BlurRadius="8" ShadowDepth="2"/>
+                            </Setter.Value>
+                        </Setter>
+
+                        <!-- Hover effect -->
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#2C5CD3"/>
+                                <Setter Property="BorderBrush" Value="#3A79F7"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+
+            <!--<Button x:Name="btnSearchEvents"
+                    Width="100"
+                    Height="50"
+                    Margin="10,0,0,0"
+                    Content="Search" Click="btnSearchEvents_Click"/>-->
+            
 
         </StackPanel>
 
-        <StackPanel Grid.Row="2"
-                    Grid.Column="1"
-                    Grid.ColumnSpan="3"
-                    Orientation="Horizontal"
-                    Margin="5"
-                    HorizontalAlignment="Center">
 
-            <Button x:Name="btnEventsList"
-                    Width="150"
+        <Button x:Name="btnEventsList"
+                Grid.Row="3"
+                Grid.Column="1"
+                Width="150"
+                Height="40"
+                Margin="20,0,0,0"
+                Content="View Events"
+                Click="btnEventsList_Click"
+                Foreground="White"
+                FontWeight="Bold"
+                FontSize="18">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#3A79F7"/>
+                    <Setter Property="BorderBrush" Value="#2C5CD3"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="Black" BlurRadius="8" ShadowDepth="2"/>
+                        </Setter.Value>
+                    </Setter>
+
+                    <!-- Hover effect -->
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#2C5CD3"/>
+                            <Setter Property="BorderBrush" Value="#3A79F7"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <Button x:Name="btnAnnouncementsList"
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Width="190"
                     Height="40"
                     Margin="20,0,0,0"
-                    Content="View Events" Click="btnEventsList_Click"/>
+                    Content="View Announcements"
+                    Click="btnAnnouncementsList_Click"
+                    Foreground="White"
+                    FontSize="16"
+                    FontWeight="Bold">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#3A79F7"/>
+                    <Setter Property="BorderBrush" Value="#2C5CD3"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="Black" BlurRadius="8" ShadowDepth="2"/>
+                        </Setter.Value>
+                    </Setter>
 
-            <Button x:Name="btnAnnouncementsList"
-                    Width="150"
-                    Height="40"
-                    Margin="20,0,0,0"
-                    Content="View Announcements"/>
+                    <!-- Hover effect -->
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#2C5CD3"/>
+                            <Setter Property="BorderBrush" Value="#3A79F7"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
-
-        </StackPanel>
 
         <Label Grid.Row="3"
-               Grid.Column="1"
+               Grid.Column="3"
                Grid.ColumnSpan="3"
-               HorizontalAlignment="Center"
+               HorizontalAlignment="Left"
                VerticalAlignment="Bottom"
                FontSize="26"
                FontWeight="Bold"
-               Content="Events"/>
+               Content="Events Menu"
+               Foreground="White"
+               Margin="15,0,0,0"/>
 
-        <Button x:Name="btnOrganiseByDate"
-                Grid.Row="3"
-                Grid.Column="1"
-                Width="50"
-                Height="30"
-                Content="By Date" Click="btnOrganiseByDate_Click"/>
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="4"
+                    Grid.Column="3"
+                    Margin="10">
 
-        <Button x:Name="btnOpenAddEvent"
-                Grid.Row="3"
-                Grid.Column="1"
-                Width="50"
-                Height="30"
-                Content="Add"
-                Click="btnOpenAddEvent_Click"
-                HorizontalAlignment="Left"
-                Margin="10,0,0,0"/>
+            <Button x:Name="btnOpenAddEvent"
+                    Width="150"
+                    Height="40"
+                    Content="Add Event"
+                    Click="btnOpenAddEvent_Click"
+                    HorizontalAlignment="Left"
+                    Margin="10,10,0,0"
+                    Foreground="White"
+                    FontSize="18"
+                    FontWeight="Bold">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#3A79F7"/>
+                        <Setter Property="BorderBrush" Value="#2C5CD3"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="Padding" Value="10,5"/>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Black" BlurRadius="8" ShadowDepth="2"/>
+                            </Setter.Value>
+                        </Setter>
+
+                        <!-- Hover effect -->
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#2C5CD3"/>
+                                <Setter Property="BorderBrush" Value="#3A79F7"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button x:Name="btnOrganiseByDate"
+                    Width="150"
+                    Height="40"
+                    Content="Sort By Date"
+                    Click="btnOrganiseByDate_Click"
+                    Margin="10,10,0,0"
+                    HorizontalAlignment="Left"
+                    Foreground="White"
+                    FontSize="18"
+                    FontWeight="Bold">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#3A79F7"/>
+                        <Setter Property="BorderBrush" Value="#2C5CD3"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="Padding" Value="10,5"/>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Black" BlurRadius="8" ShadowDepth="2"/>
+                            </Setter.Value>
+                        </Setter>
+
+                        <!-- Hover effect -->
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#2C5CD3"/>
+                                <Setter Property="BorderBrush" Value="#3A79F7"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button x:Name="btnRecommendations"
+                    Width="150"
+                    Height="40"
+                    Content="Recommend"
+                    HorizontalAlignment="Left"
+                    Margin="10,10,0,0"
+                    Click="btnRecommendations_Click"
+                    Foreground="White"
+                    FontSize="18"
+                    FontWeight="Bold">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#3A79F7"/>
+                        <Setter Property="BorderBrush" Value="#2C5CD3"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="Padding" Value="10,5"/>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Black" BlurRadius="8" ShadowDepth="2"/>
+                            </Setter.Value>
+                        </Setter>
+
+                        <!-- Hover effect -->
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#2C5CD3"/>
+                                <Setter Property="BorderBrush" Value="#3A79F7"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Label Content="Announcements"
+                   FontSize="26"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="0,20,0,0"/>
+
+            <Button x:Name="btnAddAnnouncements"
+                    Width="150"
+                    Height="40"
+                    Content="Add Announcement"
+                    HorizontalAlignment="Left"
+                    Margin="10,10,0,0"/>
+
+            <Button x:Name="btnAnnouncementByDate"
+                    Width="150"
+                    Height="40"
+                    Content="By Date"
+                    HorizontalAlignment="Left"
+                    Margin="10,10,0,0"/>
+            
+
+        </StackPanel>
+
+        
+
+
 
         <ListView x:Name="lvDisplay"
                   Grid.Row="4"
                   Grid.Column="1"
-                  Grid.ColumnSpan="3"
+                  Grid.ColumnSpan="2"
                   Margin="10"
                   BorderBrush="Black"
                   BorderThickness="1.5">

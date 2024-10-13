@@ -23,19 +23,23 @@ namespace MunicipalityApp.MVVM.View
     public partial class EventAnnouncements : UserControl
     {
         private Dictionary<string, List<Event>> eventDictionary;
+        private Dictionary<string, List<Announcement>> announcementDictionary;
         private PriorityQueue<Event, DateTime> eventPriorityQueue;
         private ObservableCollection<Event> displayedEvents;
+        private ObservableCollection<Announcement> displayedAnnouncements;
         private HashSet<string> uniqueCategories;
         private HashSet<DateTime> uniqueDates;
+        private UserSearchHistory userSearchHistory = new UserSearchHistory();
 
         public EventAnnouncements()
         {
             InitializeComponent();
             //PopulateCategoryCombobox();
-            SetSearchDate();
+            //SetSearchDate();
             InitializeEventDictionary();
             DisplayAllEvents();
             InitializePriorityQueue();
+            InitializeAnnouncementDictionary();
         }
 
         private void InitializePriorityQueue()
@@ -101,8 +105,9 @@ namespace MunicipalityApp.MVVM.View
             displayedEvents.Clear();
             foreach (var events in eventDictionary.Values.SelectMany(e => e))
             {
-                displayedEvents.Add(events); // Add all events to the ObservableCollection
+                displayedEvents.Add(events); 
             }
+            lvDisplay.ItemsSource = displayedEvents;
         }
 
         private void PopulateCategoryCombobox()
@@ -139,14 +144,16 @@ namespace MunicipalityApp.MVVM.View
             }
             DateTime selectedDate = dpEventDate.SelectedDate.Value;
 
+            userSearchHistory.RecordSearch(selectedCategory, selectedDate);
+
             string searchKey = $"{selectedCategory}_{selectedDate.ToShortDateString()}";
 
             if (eventDictionary.TryGetValue(searchKey, out var filteredEvents))
             {
-                displayedEvents.Clear(); // Clear current events
+                displayedEvents.Clear(); 
                 foreach (var ev in filteredEvents)
                 {
-                    displayedEvents.Add(ev); // Add filtered events to the ListView
+                    displayedEvents.Add(ev); 
                 }
                 //lvDisplay.ItemsSource = filteredEvents; 
             }
@@ -156,6 +163,7 @@ namespace MunicipalityApp.MVVM.View
                 DisplayAllEvents(); 
             }
 
+            //UpdateRecommendations();
             ClearSearch();
         }
 
@@ -167,17 +175,17 @@ namespace MunicipalityApp.MVVM.View
 
         private void btnOrganiseByDate_Click(object sender, RoutedEventArgs e)
         {
-            displayedEvents.Clear(); // Clear the ListView before adding sorted events
+            displayedEvents.Clear();
 
             var sortedEvents = new List<Event>();
             while (eventPriorityQueue.Count > 0)
             {
-                sortedEvents.Add(eventPriorityQueue.Dequeue()); // Add events from the priority queue
+                sortedEvents.Add(eventPriorityQueue.Dequeue()); 
             }
 
             foreach (var ev in sortedEvents)
             {
-                displayedEvents.Add(ev); // Add them to the ObservableCollection
+                displayedEvents.Add(ev); 
             }
 
             InitializePriorityQueue();
@@ -216,6 +224,84 @@ namespace MunicipalityApp.MVVM.View
 
             uniqueCategories.Add(newEvent.Category);
             uniqueDates.Add(newEvent.Date);
+        }
+
+        private List<Event> GenerateRecommendations()
+        {
+            List<Event> recommendedEvents = new List<Event>();
+
+            var topCategories = userSearchHistory.GetTopCategories();
+            var topDates = userSearchHistory.GetTopDates();
+
+            foreach (var category in topCategories)
+            {
+                foreach (var categoryEvents in eventDictionary)
+                {
+                    if (categoryEvents.Key.StartsWith(category))
+                    {
+                        recommendedEvents.AddRange(categoryEvents.Value);
+                    }
+                }
+            }
+
+            foreach (var date in topDates)
+            {
+                foreach (var categoryEvents in eventDictionary.Values)
+                {
+                    recommendedEvents.AddRange(categoryEvents.Where(ev => ev.Date == date));
+                }
+            }
+
+            return recommendedEvents.Distinct().ToList(); 
+        }
+
+        private void UpdateRecommendations()
+        {
+            List<Event> recommendations = GenerateRecommendations();
+
+            lvDisplay.ItemsSource = recommendations;
+        }
+
+        private void btnRecommendations_Click(object sender, RoutedEventArgs e)
+        {            
+            UpdateRecommendations();
+        }
+
+        private void InitializeAnnouncementDictionary()
+        {
+            announcementDictionary = new Dictionary<string, List<Announcement>>();
+
+            var sampleAnnouncement = new List<Announcement>
+            {
+                new Announcement { Name = "Electricity", Description = "Loadshedding to resume", Date = DateTime.Now.AddDays(26) },
+                new Announcement { Name = "Water", Description = "Water to be off due to maintenance", Date = DateTime.Now.AddDays(22) },
+                new Announcement { Name = "Roads", Description = "Fixing potholes", Date = DateTime.Now.AddDays(35) },
+                new Announcement { Name = "Roads", Description = "Roadwors to continue", Date = DateTime.Now.AddDays(7) }
+            };
+
+            foreach(var announcement in sampleAnnouncement)
+            {
+                string key = $"{announcement.Name}_{announcement.Date.ToShortDateString()}";
+
+                if (!announcementDictionary.ContainsKey(key))
+                {
+                    announcementDictionary[key] = new List<Announcement>();
+                }
+
+                announcementDictionary[key].Add(announcement);
+            }
+
+            displayedAnnouncements = new ObservableCollection<Announcement>(sampleAnnouncement);
+            //lvDisplay.ItemsSource = displayedAnnouncements;
+        }
+
+        private void btnAnnouncementsList_Click(object sender, RoutedEventArgs e)
+        {
+            AnnouncementWindow announcementWindow = new AnnouncementWindow(displayedAnnouncements);
+
+            announcementWindow.ShowDialog();
+                //InitializeAnnouncementDictionary();
+            
         }
     }
 
