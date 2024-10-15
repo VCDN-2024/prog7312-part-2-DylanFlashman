@@ -56,9 +56,16 @@ namespace MunicipalityApp.MVVM.View
 
         }
 
+        /*
+         * Steve
+         * adding items to a list in a dictionary
+         * StackOverflow
+         * https://stackoverflow.com/questions/14991688/adding-items-to-a-list-in-a-dictionary
+         * [Accessed 12/10/2024]
+         */
         private void InitializeEventDictionary()
         {
-
+            //used to initialize the following with data
             eventDictionary = new Dictionary<string, List<Event>>();
             uniqueCategories = new HashSet<string>(); 
             uniqueDates = new HashSet<DateTime>();
@@ -100,8 +107,7 @@ namespace MunicipalityApp.MVVM.View
 
         private void DisplayAllEvents()
         {
-            //var allEvents = eventDictionary.SelectMany(kvp => kvp.Value).ToList();
-            //lvDisplay.ItemsSource = allEvents;
+            //retrieves values from dictionary and displays using observable collection
             displayedEvents.Clear();
             foreach (var events in eventDictionary.Values.SelectMany(e => e))
             {
@@ -112,6 +118,7 @@ namespace MunicipalityApp.MVVM.View
 
         private void PopulateCategoryCombobox()
         {
+            //populated by the unique categories hash set
             cbCategories.Items.Add("Select Category");
 
             foreach (var category in uniqueCategories)
@@ -122,10 +129,10 @@ namespace MunicipalityApp.MVVM.View
             cbCategories.SelectedIndex = 0;
         }
 
-        private void SetSearchDate()
-        {
-            dpEventDate.SelectedDate = DateTime.Today;
-        }
+        //private void SetSearchDate()
+        //{
+        //    dpEventDate.SelectedDate = DateTime.Today;
+        //}
 
         private void btnSearchEvents_Click(object sender, RoutedEventArgs e)
         {
@@ -226,6 +233,13 @@ namespace MunicipalityApp.MVVM.View
             uniqueDates.Add(newEvent.Date);
         }
 
+        /* 
+         Jacob
+         How to iterate over a dictionary? [closed]
+         StackOverflow
+         https://stackoverflow.com/questions/141088/how-to-iterate-over-a-dictionary
+         [Accessed 12/10/2024]
+         */
         private List<Event> GenerateRecommendations()
         {
             List<Event> recommendedEvents = new List<Event>();
@@ -267,6 +281,13 @@ namespace MunicipalityApp.MVVM.View
             UpdateRecommendations();
         }
 
+        /*
+         * Steve
+         * adding items to a list in a dictionary
+         * StackOverflow
+         * https://stackoverflow.com/questions/14991688/adding-items-to-a-list-in-a-dictionary
+         * [Accessed 12/10/2024]
+         */
         private void InitializeAnnouncementDictionary()
         {
             announcementDictionary = new Dictionary<string, List<Announcement>>();
