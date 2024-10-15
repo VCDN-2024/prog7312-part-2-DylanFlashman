@@ -369,7 +369,7 @@
                 </Button.Style>
             </Button>
 
-            <Label Content="Announcements"
+            <!--<Label Content="Announcements"
                    FontSize="26"
                    FontWeight="Bold"
                    HorizontalAlignment="Center"
@@ -388,7 +388,7 @@
                     Height="40"
                     Content="By Date"
                     HorizontalAlignment="Left"
-                    Margin="10,10,0,0"/>
+                    Margin="10,10,0,0"/>-->
             
 
         </StackPanel>
