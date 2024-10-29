@@ -28,6 +28,10 @@
                 <view:EventAnnouncements/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:ServiceStatusRequest}">
+                <view:ServiceStatusView/>
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

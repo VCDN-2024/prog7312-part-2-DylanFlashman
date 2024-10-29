@@ -17,12 +17,14 @@ namespace MunicipalityApp.MVVM.ViewModel
         public ReportIssuesViewModel ReportIssuesVM { get; set; }
         public FeedBackViewModel FeedBackVM { get; set; }
         public EventAnnouncementsViewModel EventsVM { get; set; }
+        public ServiceStatusRequest ServiceVM { get; set; }
 
         public RelayCommand HomeViewCMD { get; set; }
         public RelayCommand ReportViewCMD { get; set; }
         public RelayCommand CloseCMD { get; set; }
         public RelayCommand FeedbackCMD { get; set; }
         public RelayCommand EventAnnouncementsCMD { get; set; }
+        public RelayCommand ServiceStatusCMD { get; set; }
         
 
         private object _currentView;
@@ -44,6 +46,7 @@ namespace MunicipalityApp.MVVM.ViewModel
             ReportIssuesVM = new ReportIssuesViewModel();
             FeedBackVM = new FeedBackViewModel();
             EventsVM = new EventAnnouncementsViewModel();
+            ServiceVM = new ServiceStatusRequest();
             CurrentView = HomeVM;
 
             HomeViewCMD = new RelayCommand(x =>
@@ -71,6 +74,10 @@ namespace MunicipalityApp.MVVM.ViewModel
                 CurrentView = EventsVM;
             });
 
+            ServiceStatusCMD = new RelayCommand(x =>
+            {
+                CurrentView = ServiceVM;
+            });
             
         }
 

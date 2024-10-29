@@ -89,8 +89,9 @@
                          Foreground="White"
                          Height="60"
                          Margin="0,10,0,0"
-                         IsEnabled="False"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                         IsEnabled="True"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ServiceStatusCMD}"/>
 
                 <RadioButton x:Name="btnFeedback"
                              Content="Provide&#10;Feedback"
