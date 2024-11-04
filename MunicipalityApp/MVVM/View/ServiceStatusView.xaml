@@ -9,6 +9,63 @@
              d:DesignWidth="800"
              Background="White">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
             
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Service Request Status" 
+                   FontSize="24" FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   Margin="10"
+                   Grid.Row="0"/>
+
+        <!-- Buttons and Search Bar -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Grid.Row="1">
+            <Button Content="View BST" Click="ViewBST_Click" Margin="5" Height="40"/>
+            <Button Content="View AVL Tree" Click="ViewAVLTree_Click" Margin="5" Height="40"/>
+            <Button Content="View MinHeap" Click="ViewMinHeap_Click" Margin="5" Height="40"/>
+
+            <!-- Search TextBox and Button -->
+            <TextBox x:Name="searchTextBox" Width="100" Height="30" Margin="10,0,5,0" 
+                     VerticalAlignment="Center"  />
+            <Button Content="Search" Click="SearchButton_Click" Margin="5" Height="30"/>
+        </StackPanel>
+
+        <!-- DataGrid for Service Requests -->
+        <DataGrid x:Name="dataGridRequests" 
+                  AutoGenerateColumns="False" 
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch" 
+                  Margin="5"
+                  IsReadOnly="True"
+                  Grid.Row="2">
+            <DataGrid.Columns>
+                <!-- ID Column -->
+                <DataGridTextColumn Header="ID" 
+                                    Binding="{Binding Id}" 
+                                    Width="Auto" />
+
+                <DataGridTextColumn Header="Description"
+                                    Binding="{Binding Description}"
+                                    Width="Auto"/>
+
+                <!-- Date Submitted Column -->
+                <DataGridTextColumn Header="Date Submitted" 
+                                    Binding="{Binding DateSubmitted, StringFormat=d}" 
+                                    Width="Auto" />
+
+                <!-- Status Column -->
+                <DataGridTextColumn Header="Status" 
+                                    Binding="{Binding Status}" 
+                                    Width="Auto" />
+
+                <!-- Priority Column -->
+                <DataGridTextColumn Header="Priority" 
+                                    Binding="{Binding Priority}" 
+                                    Width="Auto" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
