@@ -7,30 +7,200 @@
              mc:Ignorable="d" 
              d:DesignHeight="450"
              d:DesignWidth="800"
-             Background="White">
+             Background="Transparent"
+             BorderBrush="White"
+             BorderThickness="1.5">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
-            
+            <RowDefinition Height="40"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
         <TextBlock Text="Service Request Status" 
-                   FontSize="24" FontWeight="Bold" 
-                   HorizontalAlignment="Center" 
-                   Margin="10"
-                   Grid.Row="0"/>
+                   FontSize="30" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="100,10,0,0"
+                   Grid.Row="0"
+                   Foreground="White"/>
+
+        <!-- Search TextBox and Button -->
+        <TextBlock Text="Search by ID"
+                   FontSize="24"
+                   FontWeight="DemiBold"
+                   HorizontalAlignment="Left"
+                   Grid.Row="1"
+                   Margin="25,0,0,0"
+                   Foreground="White"/>
+        <TextBox x:Name="searchTextBox"
+                 Width="200"
+                 Height="30"
+                 VerticalAlignment="Center"
+                 Grid.Row="1"
+                 VerticalContentAlignment="Center"
+                 FontSize="20"
+                 BorderBrush="Black"/>
+        <Button Content="Search"
+                Click="SearchButton_Click"
+                Margin="0,0,10,5"
+                Height="40"
+                Grid.Row="1"
+                Width="100"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                FontSize="20">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#3A79F7"/>
+                    <Setter Property="BorderBrush" Value="#2C5CD3"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="Black" BlurRadius="8" ShadowDepth="2"/>
+                        </Setter.Value>
+                    </Setter>
+
+                    <!-- Hover effect -->
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#2C5CD3"/>
+                            <Setter Property="BorderBrush" Value="#3A79F7"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
         <!-- Buttons and Search Bar -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Grid.Row="1">
-            <Button Content="View BST" Click="ViewBST_Click" Margin="5" Height="40"/>
-            <Button Content="View AVL Tree" Click="ViewAVLTree_Click" Margin="5" Height="40"/>
-            <Button Content="View MinHeap" Click="ViewMinHeap_Click" Margin="5" Height="40"/>
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="10"
+                    Grid.Row="2"
+                    Grid.RowSpan="2"
+                    Grid.Column="2">
 
-            <!-- Search TextBox and Button -->
-            <TextBox x:Name="searchTextBox" Width="100" Height="30" Margin="10,0,5,0" 
-                     VerticalAlignment="Center"  />
-            <Button Content="Search" Click="SearchButton_Click" Margin="5" Height="30"/>
+            <TextBlock Text="Sort By:"
+                       FontSize="24"
+                       FontWeight="DemiBold"
+                       Margin="10"
+                       Foreground="White"></TextBlock>
+
+            <Button Content="ID"
+                    Click="ViewBST_Click"
+                    Margin="5"
+                    Height="40"
+                    FontSize="24">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#3A79F7"/>
+                        <Setter Property="BorderBrush" Value="#2C5CD3"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="Padding" Value="10,5"/>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Black" BlurRadius="8" ShadowDepth="2"/>
+                            </Setter.Value>
+                        </Setter>
+
+                        <!-- Hover effect -->
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#2C5CD3"/>
+                                <Setter Property="BorderBrush" Value="#3A79F7"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="Date"
+                    Click="ViewAVLTree_Click"
+                    Margin="5"
+                    Height="40"
+                    FontSize="24">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#3A79F7"/>
+                        <Setter Property="BorderBrush" Value="#2C5CD3"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="Padding" Value="10,5"/>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Black" BlurRadius="8" ShadowDepth="2"/>
+                            </Setter.Value>
+                        </Setter>
+
+                        <!-- Hover effect -->
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#2C5CD3"/>
+                                <Setter Property="BorderBrush" Value="#3A79F7"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Content="Priority"
+                    Click="ViewMinHeap_Click"
+                    Margin="5"
+                    Height="40"
+                    FontSize="20">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#3A79F7"/>
+                        <Setter Property="BorderBrush" Value="#2C5CD3"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="Padding" Value="10,5"/>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Black" BlurRadius="8" ShadowDepth="2"/>
+                            </Setter.Value>
+                        </Setter>
+
+                        <!-- Hover effect -->
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#2C5CD3"/>
+                                <Setter Property="BorderBrush" Value="#3A79F7"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
 
         <!-- DataGrid for Service Requests -->
@@ -38,14 +208,17 @@
                   AutoGenerateColumns="False" 
                   HorizontalAlignment="Stretch" 
                   VerticalAlignment="Stretch" 
-                  Margin="5"
+                  Margin="10"
                   IsReadOnly="True"
-                  Grid.Row="2">
+                  Grid.Row="2"
+                  BorderBrush="Black"
+                  BorderThickness="1.5">
             <DataGrid.Columns>
                 <!-- ID Column -->
                 <DataGridTextColumn Header="ID" 
                                     Binding="{Binding Id}" 
-                                    Width="Auto" />
+                                    Width="Auto"
+                                    />
 
                 <DataGridTextColumn Header="Description"
                                     Binding="{Binding Description}"

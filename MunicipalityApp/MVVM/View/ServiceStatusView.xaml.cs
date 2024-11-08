@@ -156,6 +156,13 @@ namespace MunicipalityApp.MVVM.View
             {
                 MessageBox.Show("Please enter a valid numeric ID.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            
+            ClearSearch();
+        }
+
+        private void ClearSearch()
+        {
+            searchTextBox.Text = "";
         }
     }
 }
