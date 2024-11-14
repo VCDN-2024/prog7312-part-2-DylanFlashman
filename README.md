@@ -72,6 +72,8 @@ Use the top menu to access different sections (e.g., Home, Services, Feedback, e
 ### 1. Responsive Design: Maintains the application's structure when resizing.
 ### 2. Service Requests: Users can submit and track service requests.
 ### 3. Feedback Reports: Users can provide feedback based on the app, and provide insight into the areas that need improvement.
+### 4. Local Events and Announcements: Users can view all the upcoming events and announcements.
+### 5. Service Status: Users can view and track all their service requests.
 
 ## Troubleshooting
 ### 1. Build Errors
